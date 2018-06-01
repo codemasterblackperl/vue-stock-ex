@@ -23,6 +23,11 @@ Vue.use(Vuetify);
 import store from "./store/store";
 
 
+//filters
+Vue.filter("currency", (value) => {
+  return '$' + value.toLocaleString();
+});
+
 new Vue({
   el: '#app',
   router,

@@ -17,7 +17,8 @@
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <v-btn flat>End Day</v-btn>
+      <v-btn flat
+             @click="endDay">End Day</v-btn>
       <v-menu offset-y>
         <v-btn slot="activator"
                flat>Load & Save</v-btn>
@@ -39,8 +40,14 @@
   </v-toolbar>
 </template>
 <script>
+import {mapActions} from "vuex";
+
 export default {
   methods:{
+    ...mapActions("StocksStore",["randomizeStocks"]),
+    endDay(){
+      this.randomizeStocks();
+    },
     load(){
       alert('load clicked');
     },
