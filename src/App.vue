@@ -1,14 +1,18 @@
 <template>
-  <b-container>
-    <h1>Main app</h1>
-    <hr><br><br>
+  <v-app>
+    <app-header></app-header>
+    <br>
     <router-view></router-view>
-  </b-container>
+  </v-app>
 </template>
 
 <script>
+import Header from "./components/Header";
+
 export default {
-  
+  components:{
+    appHeader:Header
+  }  
 }
 </script>
 
