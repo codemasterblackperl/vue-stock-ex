@@ -13,11 +13,15 @@
 
 <script>
 import Header from "./components/Header";
+import {mapActions} from "vuex";
 
 export default {
   components:{
     appHeader:Header
-  }  
+  },
+  created(){
+    this.$store.dispatch("StocksStore/initStocks");
+  }
 }
 </script>
 

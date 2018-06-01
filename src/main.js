@@ -19,9 +19,13 @@ import 'vuetify/dist/vuetify.min.css';
 
 Vue.use(Vuetify);
 
+//store
+import store from "./store/store";
+
 
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 });

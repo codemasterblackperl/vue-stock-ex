@@ -1,24 +1,53 @@
 <template>
   <v-flex sm6
           md4>
-    <v-card>
+    <v-card class="cardStyle">
       <v-card-title>
-        Stock Name &nbsp;&nbsp;
-        <small>Price: $100</small>
+        {{stock.name}} &nbsp;&nbsp;
+        <small>Price: ${{stock.price}}</small>
       </v-card-title>
       <v-card-actions>
         <v-text-field label="Quantity:"
                       type="number"
-                      single-line></v-text-field>
-        <v-btn color="success">Buy</v-btn>
+                      single-line
+                      v-model.number="quantity"></v-text-field>
+        <v-btn color="success"
+               :disabled="quantity<1 || !Number.isInteger(quantity)"
+               @click="buyStock">Buy</v-btn>
       </v-card-actions>
     </v-card>
   </v-flex>
 </template>
 
+<script>
+export default {
+  props:["stock"],
+  data(){
+    return{
+      quantity:0,
+    }
+  },
+  methods:{
+    buyStock(){
+
+      const order={
+        stockId:this.stock.id,
+        price:this.stock.price,
+        quantity:this.quantity
+      };
+
+      this.$store.dispatch("StocksStore/buyStock",order);
+      //after order
+      this.quantity=0;
+    }
+  }
+}
+</script>
+
+
 <style scoped>
-v-flex {
-  padding: 20px;
+.cardStyle {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 </style>
 
