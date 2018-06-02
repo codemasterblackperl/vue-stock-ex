@@ -13,6 +13,11 @@ const router = new VueRouter({
   routes
 });
 
+//vue resource
+import VueResource from "vue-resource";
+Vue.use(VueResource);
+Vue.http.options.root = "https://vuejs-stock-ex.firebaseio.com/";
+
 //styles
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';

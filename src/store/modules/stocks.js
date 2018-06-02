@@ -25,8 +25,11 @@ const actions = {
   },
   initStocks({
     commit
-  }) {
-    commit('setStocks', stocks);
+  }, stocksAvailable) {
+    if (stocksAvailable)
+      commit('setStocks', stocksAvailable);
+    else
+      commit("setStocks", stocks);
   },
   randomizeStocks({
     commit

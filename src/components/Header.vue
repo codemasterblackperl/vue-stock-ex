@@ -49,10 +49,32 @@ export default {
       this.randomizeStocks();
     },
     load(){
-      alert('load clicked');
+      this.$http.get("data.json").then(response=>{
+        return response.json();
+      },error=>{
+        console.log(error);
+      }).then(data=>{
+        this.$store.dispatch("StocksStore/initStocks",data.stocksAvailable);
+        console.log(data.stocksAvailable);
+        if(data.stockPortfolio){
+        this.$store.
+        dispatch("PortfolioStore/initPortfolio",{funds:data.funds,stocks:data.stockPortfolio});
+        }
+        else{
+          this.$store.
+        dispatch("PortfolioStore/initPortfolio",{funds:data.funds,stocks:[]});
+        }
+        
+      });
+
     },
     save(){
-      alert('save clicked');
+      const data={
+        funds:this.$store.getters["PortfolioStore/funds"],
+        stockPortfolio:this.$store.getters["PortfolioStore/stocks"],
+        stocksAvailable:this.$store.getters["StocksStore/stocks"]
+      };
+      this.$http.put('data.json',data);
     }
   }
 }

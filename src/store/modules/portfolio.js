@@ -4,6 +4,10 @@ const state = {
 };
 
 const mutations = {
+  initPortfolio(state, portfolio) {
+    state.funds = portfolio.funds;
+    state.stocks = portfolio.stocks;
+  },
   buyStock(state, order) {
     const record = state.stocks.find(x => x.id == order.stockId);
     if (record) {
@@ -32,6 +36,12 @@ const actions = {
     commit
   }, order) {
     commit("sellStock", order);
+  },
+  initPortfolio({
+    commit
+  }, payload) {
+    commit("initPortfolio", payload);
+
   }
 };
 
